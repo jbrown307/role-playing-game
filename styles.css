@@ -1,0 +1,61 @@
+/* ---------- GENERAL ---------- */
+body {
+    background-color: #0a0a23;
+}
+
+button {
+    background-color: #feac32;
+    background-image: linear-gradient(#fecc4c, #ffac33);
+    color: #0a0a23;
+    
+    border: 3px solid #feac32;
+
+    cursor: pointer;
+}
+
+/* ---------- MULTIPLE COMPONENTS ---------- */
+#controls, #stats {
+    border: 1px solid #0a0a23;
+    color: #0a0a23; 
+
+    padding: 5px;
+}
+
+.stat {
+    padding-right: 10px;
+}
+
+/* ---------- game ---------- */
+#game {
+    background-color: #ffffff;
+    color: #ffffff;
+
+    margin-top: 30px;
+    margin-bottom: 0px;
+    margin-left: auto;
+    margin-right: auto;
+    
+    padding: 10px;
+    max-width: 500px;
+    max-height: 400px;
+}
+
+/* ---------- game text ---------- */
+#text {
+    background-color: #0a0a23;
+    color: #ffffff;
+}
+
+/* ---------- monster stats ---------- */
+#monsterStats {
+    display: none;
+
+    border: 1px solid #0a0a23;
+    padding: 5px;
+
+    background-color: #c70d0d;
+    color: #ffffff;
+
+    
+}
+

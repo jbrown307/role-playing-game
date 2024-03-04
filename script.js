@@ -13,17 +13,18 @@ let inventory = ["stick"];
 // One method for finding specific elements in your HTML is using the querySelector() method. The querySelector() method takes a CSS selector as an argument and returns the first element that matches that selector
 
 // button1 is a variable that is not going to be reassigned. If you are not going to assign a new value to a variable, it is best practice to use the const keyword to declare it instead of the let keyword. This will tell JavaScript to throw an error if you accidentally reassign it.
-const button1 = document.querySelector("#button1")
-const button2 = document.querySelector("#button2")
-const button3 = document.querySelector("#button3")
+const button1 = document.querySelector("#button1");
+const button2 = document.querySelector("#button2");
+const button3 = document.querySelector("#button3");
 
-const text = document.querySelector("#text")
-const xpText = document.querySelector("#xpText")
-const goldText = document.querySelector("#goldText")
-const monsterStats = document.querySelector("#monsterStats")
-const monsterName = document.querySelector("#monsterName")
-const monsterHealthText = document.querySelector("#monsterHealth")
-const healthText = document.querySelector("#healthText")
+const text = document.querySelector("#text");
+const xpText = document.querySelector("#xpText");
+const goldText = document.querySelector("#goldText");
+const monsterStats = document.querySelector("#monsterStats");
+const monsterName = document.querySelector("#monsterName");
+const monsterHealthText = document.querySelector("#monsterHealth");
+const healthText = document.querySelector("#healthText");
+const weapons = [];
 
 // Object properties are written as key: value pairs, where key is the name of the property (or the key), and value is the value that property holds
 const locations = [
@@ -39,8 +40,37 @@ const locations = [
       "button text": ["Buy 10 health (10 gold)", "Buy weapon (30 gold)", "Go to town square"],
       "button functions": [buyHealth, buyWeapon, goTown],
       text: "You enter the store."  
+    },
+
+    {
+    name: "cave",
+    "button text": ["Fight slime", "Fight fanged beast", "Go to town square"],
+    "button functions": [fightSlime, fightBeast, goTown],
+    text: "You enter the cave. You see some monsters."
     }
   ];
+
+  const Weapons = [
+  {
+    name: "stick",
+    power: 5
+  },
+
+  {
+    name: "dagger",
+    power: 30
+  },
+
+  {
+    name: "claw hammer",
+    power: 50
+  },
+
+  {
+    name: "sword",
+    power: 100
+  }
+];
 
 // ---------- functions ----------
 
@@ -54,24 +84,44 @@ function goTown() {
 }
 
 function goStore() {
-
+  update(locations[1]);
 }
 
 function goCave() {
-    console.log("Going to cave.");
+  update(locations[2]);
 }
 
 function fightDragon() {
     console.log("Fighting dragon.");
 }
 
+// There is a shorthand way to add or subtract from a variable called compound assignment. For example, changing num = num + 5 to compound assignment would look like num += 5.
 function buyHealth() {
-
+  if (gold >= 10) {
+    gold -= 10;
+    health += 10;
+    goldText.innerText = gold;
+    healthText.innerText = health;
+  } 
+  else {
+    text.innerText=("You do not have enough gold to buy health.")
+  }
 }
   
 function buyWeapon() {
-  
+if (gold >= 30) {
+gold -= 30;
+currentWeapon ++;
 }
+}
+
+function fightSlime() {
+
+};
+
+function fightBeast() {
+
+};
 
 function update(location) {
   button1.innerText = location["button text"][0];

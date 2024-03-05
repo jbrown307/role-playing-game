@@ -6,7 +6,6 @@ let gold = 50;
 let currentWeapon = 0;
 let fighting;
 let monsterHealth;
-let inventory = ["stick"];
 
 // ---------- control vars ---------- 
 
@@ -24,7 +23,6 @@ const monsterStats = document.querySelector("#monsterStats");
 const monsterName = document.querySelector("#monsterName");
 const monsterHealthText = document.querySelector("#monsterHealth");
 const healthText = document.querySelector("#healthText");
-const weapons = [];
 
 // Object properties are written as key: value pairs, where key is the name of the property (or the key), and value is the value that property holds
 const locations = [
@@ -50,27 +48,14 @@ const locations = [
     }
   ];
 
-  const Weapons = [
-  {
-    name: "stick",
-    power: 5
-  },
+  const weapons = [
+    { name: 'stick', power: 5 },
+    { name: 'dagger', power: 30 },
+    { name: 'claw hammer', power: 50 },
+    { name: 'sword', power: 100 }
+  ];
 
-  {
-    name: "dagger",
-    power: 30
-  },
-
-  {
-    name: "claw hammer",
-    power: 50
-  },
-
-  {
-    name: "sword",
-    power: 100
-  }
-];
+  let inventory = ["stick"];
 
 // ---------- functions ----------
 
@@ -95,7 +80,26 @@ function fightDragon() {
     console.log("Fighting dragon.");
 }
 
-// There is a shorthand way to add or subtract from a variable called compound assignment. For example, changing num = num + 5 to compound assignment would look like num += 5.
+// Notice that you already have a currentWeapon variable elsewhere in your code. Since this new currentWeapon variable will be inside an if statement, it will be scoped only to that block of code
+
+// Scope is the term used to describe where a variable can be accessed. If a variable is declared inside a block of code, it is only accessible to the code inside that block. This is called block scope
+
+// The shift() method on an array removes the first element in the array and returns it
+
+// The Addition Assignment Operator (+=) adds a value to a variable
+function sellWeapon() {
+  if (inventory.length > 1) {
+    gold += 15;
+    goldText.innerText = gold;
+    let currentWeapon = inventory.shift();
+    text.innerText = "You sold a " + currentWeapon + ".";
+    text.innerText += " In your inventory you have: " + inventory;
+  } else {
+    text.innerText = "Don't sell your only weapon!";
+  }
+}
+
+// There is a shorthand way to add or subtract from a variable called compound assignment. For example, changing num = num + 5 to compound assignment would look like num += 5
 function buyHealth() {
   if (gold >= 10) {
     gold -= 10;
@@ -109,10 +113,23 @@ function buyHealth() {
 }
   
 function buyWeapon() {
-if (gold >= 30) {
-gold -= 30;
-currentWeapon ++;
-}
+  if (currentWeapon < weapons.length - 1) {
+    if (gold >= 30) {
+      gold -= 30;
+      currentWeapon++;
+      goldText.innerText = gold;
+      let newWeapon = weapons[currentWeapon].name;
+      text.innerText = "You now have a " + newWeapon + ".";
+      inventory.push(newWeapon);
+      text.innerText += " In your inventory you have: " + inventory;
+    } else {
+      text.innerText = "You do not have enough gold to buy a weapon.";
+    }
+  } else {
+    text.innerText = "You already have the most powerful weapon!";
+    button2.innerText = "Sell weapon for 15 gold";
+    button2.onclick = sellWeapon;
+  }
 }
 
 function fightSlime() {
@@ -131,7 +148,7 @@ function update(location) {
   button2.onclick = location["button functions"][1]
   button3.onclick = location["button functions"][2]
   text.innerText = location.text;
-}
+};
   
 
 
